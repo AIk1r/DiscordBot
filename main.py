@@ -40,15 +40,15 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    welcome_channel = bot.get_channel(749908442398982145)
-    print(f"{member} зашёл")
-    await welcome_channel.send(f"Здарова, {member.mention}, заебал")
+    welcome_channel = bot.get_channel(your id channel)
+    print(f"{member} join us")
+    await welcome_channel.send(f"Hello, {member.mention}, welcome")
 
 @bot.event
 async def on_member_remove(member):
-    print(f'{member} покинул нас')
-    leave_channel = bot.get_channel(749908442398982145)
-    await leave_channel.send(f'{member.mention} съебался в ужасе')
+    print(f'{member} left us')
+    leave_channel = bot.get_channel(your id channel)
+    await leave_channel.send(f'{member.mention} bb!')
 
 
 bot.run(TOKEN)
