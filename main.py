@@ -35,7 +35,7 @@ async def on_ready():
 # async def on_member_join(member):
 #     await member.create_dm()
 #     await member.dm_channel.send(
-#         f'Здарова, {member.name}, заебал'
+#         f'{member.name} yo'
 #     )
 
 @bot.event
