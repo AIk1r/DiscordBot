@@ -41,14 +41,18 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    welcome_channel = bot.get_channel(WELC_CHANNEL)
+    welcome_channel = bot.get_channel(int(WELC_CHANNEL))
     print(f"{member} join us")
     await welcome_channel.send(f"Hello, {member.mention}, welcome")
+    role_name = "Member"  # Your role's name, in my case it's 'Member'
+    role = discord.utils.get(member.guild.roles, name=role_name)
+    await member.add_roles(role)
+    print(f"add role {member}")
 
 @bot.event
 async def on_member_remove(member):
     print(f'{member} left us')
-    leave_channel = bot.get_channel(WELC_CHANNEL)
+    leave_channel = bot.get_channel(int(WELC_CHANNEL))
     await leave_channel.send(f'{member.mention} bb!')
 
 
