@@ -15,7 +15,8 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
-WELC_CHANNEL = os.getenv('WELCOME_CHANNEL')
+WELCOME_CHANNEL = os.getenv('DISCORD_WELCOME_CHANNEL')
+GENERAL_ROLE = os.getenv('DISCORD_GENERAL_ROLE')
 
 
 @bot.event
@@ -54,6 +55,14 @@ async def on_member_remove(member):
     print(f'{member} left us')
     leave_channel = bot.get_channel(int(WELC_CHANNEL))
     await leave_channel.send(f'{member.mention} bb!')
+
+@bot.command()
+async def all_role(ctx):
+    guild = ctx.guild
+    role = guild.get_role(int(GENERAL_ROLE))
+    for m in guild.members:
+        await m.add_roles(role)
+        await asyncio.sleep(2)
 
 
 bot.run(TOKEN)
