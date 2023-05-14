@@ -33,19 +33,19 @@ async def on_ready():
     # print(f'Guild Members:\n - {members}')
 
 
-# @bot.event
-# async def on_member_join(member):
-#     await member.create_dm()
-#     await member.dm_channel.send(
-#         f'{member.name} yo'
-#     )
+@bot.event
+async def on_member_join(member):
+    await member.create_dm()
+    await member.dm_channel.send(
+        f'{member.name} yo'
+    )
 
 @bot.event
 async def on_member_join(member):
     welcome_channel = bot.get_channel(int(WELC_CHANNEL))
     print(f"{member} join us")
     await welcome_channel.send(f"Hello, {member.mention}, welcome")
-    role_name = "Member"  # Your role's name, in my case it's 'Member'
+    role_name = "Club member"  # Your role's name, in my case it's 'Club member'
     role = discord.utils.get(member.guild.roles, name=role_name)
     await member.add_roles(role)
     print(f"add role {member}")
@@ -63,6 +63,15 @@ async def all_role(ctx):
     for m in guild.members:
         await m.add_roles(role)
         await asyncio.sleep(2)
+
+@bot.command()
+async def avatar(ctx, member: discord.Member  = None):
+    if member == None:#if you don't mention the participant then the avatar of the author of the post is displayed
+        member = ctx.author
+    embed = discord.Embed(color = 0x8B0000, title = f"Member's avatar - {member.name}", description = f"[Click to download the avatar]({member.avatar})")
+    embed.set_image(url = member.avatar)
+    await ctx.send(embed = embed)
+
 
 
 bot.run(TOKEN)
