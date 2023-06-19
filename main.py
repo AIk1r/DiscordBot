@@ -87,6 +87,13 @@ async def mute(ctx, member : discord.Member):
     await ctx.channel.purge(limit=1)
     await ctx.send(str(member) + ' has been muted!')
 
+@bot.command()
+@commands.has_permissions(manage_messages=True)
+async def unmute(ctx, member: discord.Member):
+    mutedRole = ctx.guild.get_role(int(MUTE_ROLE))
 
+    await member.remove_roles(mutedRole)
+    await ctx.send(f"Unmuted {member.mention}")
+    await member.send(f"You were unmuted in the server {ctx.guild.name}")
 
 bot.run(TOKEN)
